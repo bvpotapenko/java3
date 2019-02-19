@@ -1,7 +1,12 @@
 package ru.bvpotapenko.se.j3.hw1.fruit;
 
-public abstract class Fruit {
+public enum Fruit {
+    APPLE(1.0f), ORANGE(1.5f);
     private float weight;
 
-    public abstract float getWeight();
+    Fruit(float weight){
+        this.weight = weight;
+    }
+
+    public float getWeight(){ return weight;}
 }

@@ -1,27 +1,44 @@
 package ru.bvpotapenko.se.j3.hw1.fruit;
 
-import java.util.ArrayList;
+public class Box {
+    private static final float THRESHOLD = 2 * Float.MIN_VALUE;
+    private Fruit fruit;
+    private int size;
 
-public class Box<E extends Fruit> {
-    private ArrayList<E> box;
-    public Box(){
-        box = new ArrayList<>();
-    }
-    public float getWeight(){
-        if(box.size() == 0) return 0;
-        System.out.println("box.size(): "+box.size() + " box.get(0).getWeight(): " + box.get(0).getWeight());
-        return box.size() * box.get(0).getWeight();
+    public Box(Fruit fruit) {
+        this.fruit = fruit;
+        size = 0;
     }
 
-    public void addFruit(E fruit){
-        box.add(fruit);
+    public float getWeight() {
+        return size * fruit.getWeight();
+    }
+
+    public void addFruit(int fruitAmount) {
+        size += fruitAmount;
     }
 
     public boolean compare(Object o) {
         if (this == o) return true;
         if (!(o instanceof Box)) return false;
-        Box<?> box = (Box<?>) o;
-        return Float.compare(box.getWeight(), getWeight()) == 0;
-   }
+        Box box = (Box) o;
+        return Math.abs(box.getWeight() - getWeight()) < THRESHOLD;
+    }
+
+    public int empty() {
+        int oldSize = size;
+        size = 0;
+        return oldSize;
+    }
+
+    public Fruit getFruitType() {
+        return fruit;
+    }
+
+    public boolean getFruitFrom(Box box) {
+        if (fruit != box.fruit) return false;
+        addFruit(box.empty());
+        return true;
+    }
 
 }

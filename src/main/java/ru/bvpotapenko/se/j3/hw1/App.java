@@ -1,12 +1,9 @@
 package ru.bvpotapenko.se.j3.hw1;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-import ru.bvpotapenko.se.j3.hw1.fruit.Apple;
 import ru.bvpotapenko.se.j3.hw1.fruit.Box;
 import ru.bvpotapenko.se.j3.hw1.fruit.Fruit;
-import ru.bvpotapenko.se.j3.hw1.fruit.Orange;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,13 +20,11 @@ public class App {
      * 1. Написать метод, который меняет два элемента массива местами.(массив может быть любого ссылочного типа);
      */
     static void task_1() {
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(6);
-        list.add(7);
-        System.out.println(list);
-        new Switcher<Integer>().switchItems((ArrayList) list, 0, 2);
-        System.out.println(list);
+        Integer[] list = {5, 6, 7};
+        System.out.println(Arrays.toString(list));
+        new Switcher<Integer>().switchItems(list, 0, 2);
+        System.out.println(Arrays.toString(list));
+        System.out.println();
     }
 
     /**
@@ -39,21 +34,32 @@ public class App {
         String[] strArr = {"1", "2", "3"};
         List<String> sList = new Converter<String>().toArrayList(strArr);
         System.out.println(sList.getClass() + ": " + sList);
+        System.out.println();
     }
 
     /**
      * Fruit
      */
     static void task_3() {
-        Fruit apple = new Apple();
-        Fruit orange = new Orange();
-        Box<Apple> appleBox = new Box<>();
-        Box<Orange> orangeBox = new Box<>();
-        appleBox.addFruit((Apple) apple);
-        orangeBox.addFruit((Orange) orange);
-        System.out.println("Box_1: "+appleBox.getWeight());
-        System.out.println("Box_2: "+orangeBox.getWeight());
-        System.out.println("Compare: "+appleBox.compare(orangeBox));
+        Box appleBox = new Box(Fruit.APPLE);
+        Box appleBox2 = new Box(Fruit.APPLE);
+        Box orangeBox = new Box(Fruit.ORANGE);
+        appleBox.addFruit(5);
+        appleBox2.addFruit(15);
+        orangeBox.addFruit(10);
+        System.out.println("appleBox: "+appleBox.getWeight());
+        System.out.println("appleBox_2: "+appleBox2.getWeight());
+        System.out.println("orangeBox: "+orangeBox.getWeight());
+        System.out.println();
+        System.out.println("Compare Apple with Orange: "+appleBox.compare(orangeBox));
+        System.out.println();
+        System.out.println("From Orange to Apple: " + appleBox.getFruitFrom(orangeBox));
+        System.out.println("appleBox: "+appleBox.getWeight());
+        System.out.println("orangeBox: "+orangeBox.getWeight());
+        System.out.println();
+        System.out.println("From Apple to Apple2: " + appleBox2.getFruitFrom(appleBox));
+        System.out.println("appleBox: "+appleBox.getWeight());
+        System.out.println("appleBox_2: "+appleBox2.getWeight());
 
     }
 }
