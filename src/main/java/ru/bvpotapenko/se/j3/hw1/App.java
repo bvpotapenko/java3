@@ -45,13 +45,14 @@ public class App {
         Box appleBox2 = new Box(Fruit.APPLE);
         Box orangeBox = new Box(Fruit.ORANGE);
         appleBox.addFruit(5);
-        appleBox2.addFruit(15);
+        appleBox2.addFruit(5);
         orangeBox.addFruit(10);
         System.out.println("appleBox: "+appleBox.getWeight());
         System.out.println("appleBox_2: "+appleBox2.getWeight());
         System.out.println("orangeBox: "+orangeBox.getWeight());
         System.out.println();
         System.out.println("Compare Apple with Orange: "+appleBox.compare(orangeBox));
+        System.out.println("Compare Apple with Apple_2: "+appleBox.compare(appleBox2));
         System.out.println();
         System.out.println("From Orange to Apple: " + appleBox.getFruitFrom(orangeBox));
         System.out.println("appleBox: "+appleBox.getWeight());

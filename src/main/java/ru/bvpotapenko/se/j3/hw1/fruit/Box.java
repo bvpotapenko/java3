@@ -18,10 +18,8 @@ public class Box {
         size += fruitAmount;
     }
 
-    public boolean compare(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Box)) return false;
-        Box box = (Box) o;
+    public boolean compare(Box box) {
+        if (this == box) return true;
         return Math.abs(box.getWeight() - getWeight()) < THRESHOLD;
     }
 
