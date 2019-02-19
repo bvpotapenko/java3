@@ -8,22 +8,29 @@ import java.util.List;
  */
 public class App {
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(6);
-        list.add(7);
-        System.out.println(list);
-        switchItems((ArrayList) list, 0, 2);
-        System.out.println(list);
+        task_1();
+        task_2();
     }
 
     /**
      * 1. Написать метод, который меняет два элемента массива местами.(массив может быть любого ссылочного типа);
      */
+    static void task_1() {
+        List<Integer> list = new ArrayList<>();
+        list.add(5);
+        list.add(6);
+        list.add(7);
+        System.out.println(list);
+        new Switcher<Integer>().switchItems((ArrayList) list, 0, 2);
+        System.out.println(list);
+    }
 
-    static void switchItems(ArrayList arr, int item1, int item2) {
-        Object temp = arr.get(item1);
-        arr.set(item1, arr.get(item2));
-        arr.set(item2, temp);
+    /**
+     * Написать метод, который преобразует массив в ArrayList;
+     */
+    static void task_2() {
+        String[] strArr = {"1", "2", "3"};
+        List<String> sList = new Converter<String>().toArrayList(strArr);
+        System.out.println(sList.getClass() + ": " + sList);
     }
 }
