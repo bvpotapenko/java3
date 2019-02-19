@@ -1,13 +1,14 @@
 package ru.bvpotapenko.se.j3.hw1.fruit;
 
-public class Box {
+public class Box<F extends Fruit> {
     private static final float THRESHOLD = 2 * Float.MIN_VALUE;
-    private Fruit fruit;
+    private F fruit;
     private int size;
 
-    public Box(Fruit fruit) {
-        this.fruit = fruit;
+    public Box(F fruit) {
         size = 0;
+        this.fruit = fruit;
+
     }
 
     public float getWeight() {
@@ -23,7 +24,7 @@ public class Box {
         return Math.abs(box.getWeight() - getWeight()) < THRESHOLD;
     }
 
-    public int empty() {
+    private int empty() {
         int oldSize = size;
         size = 0;
         return oldSize;
@@ -33,10 +34,10 @@ public class Box {
         return fruit;
     }
 
-    public boolean getFruitFrom(Box box) {
-        if (fruit != box.fruit) return false;
-        addFruit(box.empty());
-        return true;
+    public int getFruitFrom(Box<F> box) {
+        int boxHadFruit = box.empty();
+        addFruit(boxHadFruit);
+        return boxHadFruit;
     }
 
 }

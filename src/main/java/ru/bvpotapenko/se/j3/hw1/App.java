@@ -1,7 +1,9 @@
 package ru.bvpotapenko.se.j3.hw1;
 
+import ru.bvpotapenko.se.j3.hw1.fruit.Apple;
 import ru.bvpotapenko.se.j3.hw1.fruit.Box;
 import ru.bvpotapenko.se.j3.hw1.fruit.Fruit;
+import ru.bvpotapenko.se.j3.hw1.fruit.Orange;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,9 +43,9 @@ public class App {
      * Fruit
      */
     static void task_3() {
-        Box appleBox = new Box(Fruit.APPLE);
-        Box appleBox2 = new Box(Fruit.APPLE);
-        Box orangeBox = new Box(Fruit.ORANGE);
+        Box appleBox = new Box(new Apple());
+        Box appleBox2 = new Box(new Apple());
+        Box orangeBox = new Box(new Orange());
         appleBox.addFruit(5);
         appleBox2.addFruit(5);
         orangeBox.addFruit(10);
@@ -54,10 +56,12 @@ public class App {
         System.out.println("Compare Apple with Orange: "+appleBox.compare(orangeBox));
         System.out.println("Compare Apple with Apple_2: "+appleBox.compare(appleBox2));
         System.out.println();
-        System.out.println("From Orange to Apple: " + appleBox.getFruitFrom(orangeBox));
-        System.out.println("appleBox: "+appleBox.getWeight());
-        System.out.println("orangeBox: "+orangeBox.getWeight());
-        System.out.println();
+       /**
+        *   Compile time error
+        *  System.out.println("From Orange to Apple: " + appleBox.getFruitFrom(orangeBox));
+        *  System.out.println("appleBox: "+appleBox.getWeight());
+        *  System.out.println("orangeBox: "+orangeBox.getWeight());
+        *  System.out.println();*/
         System.out.println("From Apple to Apple2: " + appleBox2.getFruitFrom(appleBox));
         System.out.println("appleBox: "+appleBox.getWeight());
         System.out.println("appleBox_2: "+appleBox2.getWeight());
