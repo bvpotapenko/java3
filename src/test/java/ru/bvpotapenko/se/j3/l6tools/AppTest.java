@@ -21,10 +21,10 @@ public class AppTest {
 
     private static Stream<Arguments> getArrTailTestProvider() {
         return Stream.of(
-                Arguments.of(new int[]{1, 2, 3, 4, 1, 2, 3, 4, 1, 4, 1}, new int[]{1, 4, 1}),
+                Arguments.of(new int[]{1, 2, 3, 4, 1, 2, 3, 4, 1, 4, 1}, new int[]{1}),
                 Arguments.of(new int[]{1, 2, 3, 4}, new int[]{}),
                 Arguments.of(new int[]{1, 2, 3, 4, 1, 2, 3}, new int[]{1, 2, 3}),
-                Arguments.of(new int[]{1, 2, 3, 4, 1, 2, 3, 4}, new int[]{})
+                Arguments.of(new int[]{1, 2, 3, 4, 1, 2, 3, 4, 7, 7, 7}, new int[]{7, 7, 7})
         );
     }
 
