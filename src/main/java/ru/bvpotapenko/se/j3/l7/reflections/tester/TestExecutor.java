@@ -10,11 +10,11 @@ import java.util.*;
 
 public class TestExecutor {
     private static Comparator<Method> cmp = Comparator.comparingInt(o -> o.getAnnotation(Test.class).priority());
-    public static Queue<Method> methodsToExecute = new PriorityQueue<>(cmp);
-    public static Method beforeSuite;
-    public static Method afterSuite;
-    public static boolean overallResult = true;
-    public static Object test;
+    private static Queue<Method> methodsToExecute = new PriorityQueue<>(cmp);
+    private static Method beforeSuite;
+    private static Method afterSuite;
+    private static boolean overallResult = true;
+    private static Object test;
     private static Class testClass;
 
     public static boolean start(String className) {
@@ -29,7 +29,7 @@ public class TestExecutor {
     }
 
     public static boolean start(Class testClass) {
-        /**
+        /*
          * 0. Throw an exception if there are two or more methods with @BeforeSuite and/or @AfterSuite annotations
          * 1. Start @BeforeSuite
          * 2. Prioritize @Test by "priority" value
@@ -88,23 +88,18 @@ public class TestExecutor {
     private static void prepareTestSet() {
         beforeSuite = null;
         afterSuite = null;
-        int beforeSuiteCount = 0;
-        int afterSuiteCount = 0;
         for (Method method : testClass.getDeclaredMethods()) {
             if (method.isAnnotationPresent(Test.class)) {
                 methodsToExecute.add(method);
             }
             if (method.isAnnotationPresent(BeforeSuite.class)) {
-                beforeSuiteCount++;
+                if (beforeSuite != null) throw new RuntimeException("Multiply @BeforeSuite declaration");
                 beforeSuite = method;
             }
             if (method.isAnnotationPresent(AfterSuite.class)) {
-                afterSuiteCount++;
+                if (afterSuite != null) throw new RuntimeException("Multiply @AfterSuite declaration");
                 afterSuite = method;
             }
-
-            if (beforeSuiteCount > 1) throw new RuntimeException("Multiply @BeforeSuite declaration");
-            if (afterSuiteCount > 1) throw new RuntimeException("Multiply @AfterSuite declaration");
         }
     }
 
